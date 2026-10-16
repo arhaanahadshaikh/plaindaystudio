@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support & Contact — Plain Day Studio</title>
+  <meta name="description" content="Get support, report a bug, or apply for beta testing for Plain Day Studio apps on Android and iOS." />
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 54 42' fill='none'><rect width='54' height='42' rx='10' fill='%23121215'/><path d='M11 36V11' stroke='%23fbbf24' stroke-width='3.5' stroke-linecap='round'/><circle cx='21' cy='21' r='10' stroke='%23fbbf24' stroke-width='3.5'/><path d='M43 6V31' stroke='%2300e5ff' stroke-width='3.5' stroke-linecap='round'/><circle cx='33' cy='21' r='10' stroke='%2300e5ff' stroke-width='3.5'/><path d='M27 13A10 10 0 0 1 27 29A10 10 0 0 1 27 13' fill='%23f97316' fill-opacity='0.3'/><path d='M27 13A10 10 0 0 1 27 29' stroke='%23f97316' stroke-width='3.5'/><path d='M27 13A10 10 0 0 0 27 29' stroke='%23f97316' stroke-width='3.5'/></svg>" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-200 antialiased font-sans flex flex-col min-h-screen">
+
+  <header class="sticky top-0 z-40 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/90 dark:bg-zinc-950/90 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform">
+          <svg class="w-full h-full" viewBox="0 0 54 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 11 36 V 11" stroke="#FBBF24" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="21" cy="21" r="10" stroke="#FBBF24" stroke-width="3.5"/>
+            <path d="M 43 6 V 31" stroke="#00E5FF" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="33" cy="21" r="10" stroke="#00E5FF" stroke-width="3.5"/>
+            <path d="M 27 13 A 10 10 0 0 1 27 29 A 10 10 0 0 1 27 13" fill="#F97316" fill-opacity="0.3"/>
+            <path d="M 27 13 A 10 10 0 0 1 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M 27 13 A 10 10 0 0 0 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="font-extrabold text-base text-zinc-900 dark:text-zinc-100">Plain Day Studio</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <button id="theme-toggle" aria-label="Toggle theme" class="w-9 h-9 rounded-lg border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900">
+          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1">
+    
+    <div class="mb-10 text-center max-w-xl mx-auto">
+      <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="message-square" class="w-6 h-6"></i>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
+        Developer Support & Beta Feedback
+      </h1>
+      <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2">
+        Have a bug to report from TestFlight or Google Play closed testing? Need help or want to request a feature? Reach out directly.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Left: Direct Info Cards -->
+      <div class="space-y-4">
+        
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <div class="flex items-center gap-2.5 text-zinc-900 dark:text-zinc-100 font-bold text-sm mb-1">
+            <i data-lucide="mail" class="w-4 h-4 text-amber-500"></i>
+            <span>Email Developer</span>
+          </div>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-2">Direct developer inbox:</p>
+          <a href="mailto:contact.plaindaystudio@gmail.com" class="text-xs font-mono font-medium text-amber-600 dark:text-amber-400 hover:underline break-all">
+            contact.plaindaystudio@gmail.com
+          </a>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <div class="flex items-center gap-2.5 text-zinc-900 dark:text-zinc-100 font-bold text-sm mb-1">
+            <i data-lucide="flask-conical" class="w-4 h-4 text-cyan-500"></i>
+            <span>Beta Testing Track</span>
+          </div>
+          <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Include your Google Play or Apple ID email so we can whitelist your account for TestFlight or closed testing.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <div class="flex items-center gap-2.5 text-zinc-900 dark:text-zinc-100 font-bold text-sm mb-1">
+            <i data-lucide="user-x" class="w-4 h-4 text-rose-500"></i>
+            <span>Account Deletion</span>
+          </div>
+          <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            To delete your cloud data for SwimPulse Pro or SplitPlain, email us with your registered phone number or email address.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="md:col-span-2 p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+        <h3 class="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-4">Send a Message</h3>
+        
+        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4 text-sm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Your Name</label>
+              <input 
+                type="text" 
+                required 
+                id="c-name"
+                placeholder="e.g. Jordan" 
+                class="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Your Email</label>
+              <input 
+                type="email" 
+                required 
+                id="c-email"
+                placeholder="jordan@example.com" 
+                class="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Select App</label>
+              <select id="c-app" class="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm text-zinc-800 dark:text-zinc-200">
+                <option value="General Inquiry">General Studio Inquiry</option>
+                <option value="SwimPulse Pro">SwimPulse Pro (Swimming App)</option>
+                <option value="Do Nothing">Do Nothing (Reduce Screentime)</option>
+                <option value="Breathing">Breathing (Rhythm & Patterns)</option>
+                <option value="Stare">Stare (Visual Mindfulness)</option>
+                <option value="Pop">Pop (Haptic Fidget)</option>
+                <option value="One Thing">One Thing (Single-Task Focus)</option>
+                <option value="Wait">Wait (Micro-Pauses)</option>
+                <option value="One Question">One Question (Daily Prompt)</option>
+                <option value="PhoneDown">PhoneDown (Screen-Free Challenge)</option>
+                <option value="SplitPlain">SplitPlain (Shared Expenses)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Platform</label>
+              <select id="c-platform" class="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm text-zinc-800 dark:text-zinc-200">
+                <option value="Android (Google Play)">Android (Google Play)</option>
+                <option value="iOS (Apple TestFlight)">iOS (Apple TestFlight)</option>
+                <option value="General / Both">General / Both</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Message / Bug Report / Feature Idea</label>
+            <textarea 
+              rows="4" 
+              required 
+              id="c-msg"
+              placeholder="Describe your bug (include device model & OS version) or feature request..." 
+              class="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full py-3 px-6 rounded-xl font-bold bg-amber-500 hover:bg-amber-600 text-zinc-950 transition-colors flex items-center justify-center gap-2 shadow-sm"
+          >
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>Send Message</span>
+          </button>
+
+          <div id="contact-status" class="hidden p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs text-center font-medium">
+            ✅ Feedback recorded! Launching email client draft...
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <section class="mt-16 pt-12 border-t border-zinc-200 dark:border-zinc-800">
+      <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100 text-center mb-8">Frequently Asked Questions</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100 mb-1">How do I test on iOS (Apple TestFlight)?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+            Download the official Apple TestFlight app from the App Store. When you submit your Apple ID email above, you will receive an invitation email with a redeem code or direct test link.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100 mb-1">How do I test on Android (Google Play)?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+            We add your Google account to our closed testing track in Google Play Console. You will receive an opt-in web link that unlocks the private beta on your device's Google Play Store app.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100 mb-1">Which apps require a login?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+            Only multi-device collaborative apps: <em>SwimPulse Pro</em> (for swim teams & parents) and <em>SplitPlain</em> (for group expenses) use phone number or email authentication. Mindfulness tools stay 100% account-free and offline.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+          <h4 class="font-bold text-zinc-900 dark:text-zinc-100 mb-1">How do subscriptions work?</h4>
+          <p class="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
+            During beta testing, pro features are free. When launched, pro subscriptions will be billed via official Apple StoreKit or Google Play In-App Billing, allowing easy cancellation in your phone's OS settings anytime.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-8 text-xs text-zinc-500 dark:text-zinc-400">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>&copy; 2026 Plain Day Studio. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="privacy.html" class="hover:underline">Privacy Policy</a>
+        <a href="terms.html" class="hover:underline">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = localStorage.getItem('plainday_theme') || (userPrefersDark ? 'dark' : 'light');
+
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('plainday_theme', isDark ? 'dark' : 'light');
+    });
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('c-name').value;
+      const email = document.getElementById('c-email').value;
+      const app = document.getElementById('c-app').value;
+      const platform = document.getElementById('c-platform').value;
+      const msg = document.getElementById('c-msg').value;
+
+      const subject = encodeURIComponent(`[${app}] [${platform}] Feedback from ${name}`);
+      const body = encodeURIComponent(`Sender: ${name} (${email})\nApp: ${app}\nPlatform: ${platform}\n\nMessage:\n${msg}`);
+      
+      const status = document.getElementById('contact-status');
+      status.classList.remove('hidden');
+
+      setTimeout(() => {
+        window.location.href = `mailto:contact.plaindaystudio@gmail.com?subject=${subject}&body=${body}`;
+      }, 600);
+    }
+  </script>
+</body>
+</html>

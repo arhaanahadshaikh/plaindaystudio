@@ -1,0 +1,16 @@
+<svg viewBox="0 0 54 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- P: Yellow-Amber Ring + Descending Stem -->
+  <path d="M 11 36 V 11" stroke="#FBBF24" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="21" cy="21" r="10" stroke="#FBBF24" stroke-width="3.5"/>
+
+  <!-- d: Electric Cyan Ring + Ascending Stem -->
+  <path d="M 43 6 V 31" stroke="#00E5FF" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="33" cy="21" r="10" stroke="#00E5FF" stroke-width="3.5"/>
+
+  <!-- Translucent Overlapping Lens Glow -->
+  <path d="M 27 13 A 10 10 0 0 1 27 29 A 10 10 0 0 1 27 13" fill="#F97316" fill-opacity="0.25"/>
+
+  <!-- Intersecting Arcs (Warm Orange Bridge) -->
+  <path d="M 27 13 A 10 10 0 0 1 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 27 13 A 10 10 0 0 0 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

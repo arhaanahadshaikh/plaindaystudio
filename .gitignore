@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Scratch & test
+test_logo.html
+generate_svg.py

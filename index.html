@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plain Day Studio — Thoughtful Mobile Apps for Android & iOS</title>
+  <meta name="description" content="Plain Day Studio builds calm, focused applications for Android and iOS. Mindfulness, screen-time reduction, sports coaching, and daily utilities." />
+  
+  <!-- Favicon SVG: Interlocking P+D Monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 54 42' fill='none'><rect width='54' height='42' rx='10' fill='%23121215'/><path d='M11 36V11' stroke='%23fbbf24' stroke-width='3.5' stroke-linecap='round'/><circle cx='21' cy='21' r='10' stroke='%23fbbf24' stroke-width='3.5'/><path d='M43 6V31' stroke='%2300e5ff' stroke-width='3.5' stroke-linecap='round'/><circle cx='33' cy='21' r='10' stroke='%2300e5ff' stroke-width='3.5'/><path d='M27 13A10 10 0 0 1 27 29A10 10 0 0 1 27 13' fill='%23f97316' fill-opacity='0.3'/><path d='M27 13A10 10 0 0 1 27 29' stroke='%23f97316' stroke-width='3.5'/><path d='M27 13A10 10 0 0 0 27 29' stroke='%23f97316' stroke-width='3.5'/></svg>" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#78350f',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .hero-glow {
+      background: radial-gradient(circle 650px at 50% 18%, rgba(245, 158, 11, 0.12), transparent 70%);
+    }
+    .dark .hero-glow {
+      background: radial-gradient(circle 750px at 50% 18%, rgba(245, 158, 11, 0.15), transparent 75%);
+    }
+    .glass-nav {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .tab-btn.active {
+      background-color: #18181b;
+      color: #ffffff;
+      border-color: #18181b;
+    }
+    .dark .tab-btn.active {
+      background-color: #f4f4f5;
+      color: #09090b;
+      border-color: #f4f4f5;
+    }
+    .spec-drawer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+    .spec-drawer.open {
+      max-height: 380px;
+      opacity: 1;
+    }
+    /* Logo concept preview radio pills */
+    .logo-choice.active {
+      border-color: #f59e0b;
+      background-color: rgba(245, 158, 11, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-200 antialiased font-sans flex flex-col min-h-screen">
+
+  <!-- ==================== HEADER / NAV ==================== -->
+  <header class="sticky top-0 z-40 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/90 dark:bg-zinc-950/90 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo: Interlocking P+D Monogram -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div id="site-brand-icon" class="w-11 h-11 rounded-2xl bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-center p-2 shadow-sm group-hover:scale-105 transition-transform duration-200">
+          <!-- Interlocking P+D SVG -->
+          <svg class="w-full h-full" viewBox="0 0 54 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 11 36 V 11" stroke="#FBBF24" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="21" cy="21" r="10" stroke="#FBBF24" stroke-width="3.5"/>
+            <path d="M 43 6 V 31" stroke="#00E5FF" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="33" cy="21" r="10" stroke="#00E5FF" stroke-width="3.5"/>
+            <path d="M 27 13 A 10 10 0 0 1 27 29 A 10 10 0 0 1 27 13" fill="#F97316" fill-opacity="0.3"/>
+            <path d="M 27 13 A 10 10 0 0 1 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M 27 13 A 10 10 0 0 0 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-extrabold text-base sm:text-lg tracking-tight text-zinc-900 dark:text-zinc-50 block leading-none">Plain Day Studio</span>
+          <span class="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium block mt-1">Independent Applications</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+        <a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Apps in Beta</a>
+        <a href="#philosophy" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Manifesto</a>
+        <a href="contact.html" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Support & Contact</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-2.5">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle theme" class="w-9 h-9 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
+          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+
+        <!-- Join Beta CTA -->
+        <a href="#beta-signup" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-sm">
+          <span>Join Beta</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open menu" class="md:hidden w-9 h-9 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Slide-down Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 px-4 py-4 space-y-3 text-sm font-medium">
+      <a href="#apps" onclick="toggleMobileMenu()" class="block py-1 text-zinc-700 dark:text-zinc-300">Apps Pipeline (10)</a>
+      <a href="#philosophy" onclick="toggleMobileMenu()" class="block py-1 text-zinc-700 dark:text-zinc-300">Manifesto & Architecture</a>
+      <a href="contact.html" class="block py-1 text-zinc-700 dark:text-zinc-300">Support & Feedback</a>
+      <a href="#beta-signup" onclick="toggleMobileMenu()" class="block text-center py-2.5 rounded-xl bg-amber-500 font-bold text-zinc-950 text-xs">Request Beta Invitation</a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative hero-glow pt-16 pb-16 md:pt-24 md:pb-24 border-b border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+        
+        <!-- Live Status Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-50/70 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 text-xs font-semibold mb-6">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+          <span>10 Apps in Closed Beta &bull; Android & iOS TestFlight</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 leading-[1.12]">
+          Simple, intentional software for your <span class="bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">everyday life</span>.
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-2xl">
+          Plain Day Studio is an independent mobile lab crafting quiet, focused apps for Android and iOS. Built without algorithmic noise, predatory subscriptions, or surveillance tracking.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+          <a href="#apps" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold bg-amber-500 hover:bg-amber-600 text-zinc-950 transition-colors shadow-sm shadow-amber-500/20 text-sm">
+            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+            <span>Explore 10 Beta Apps</span>
+          </a>
+          <a href="#beta-signup" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-800 dark:text-zinc-200 transition-colors text-sm">
+            <i data-lucide="beaker" class="w-4 h-4 text-amber-500"></i>
+            <span>Apply as Verified Tester</span>
+          </a>
+        </div>
+
+        <!-- Platform Badges -->
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="play" class="w-4 h-4 text-emerald-500 fill-emerald-500"></i>
+            <span>Google Play Closed Tracks</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="apple" class="w-4 h-4 text-zinc-800 dark:text-zinc-200"></i>
+            <span>Apple TestFlight</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="database" class="w-4 h-4 text-amber-500"></i>
+            <span>Hybrid Local / Cloud Sync</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4 text-indigo-500"></i>
+            <span>Free & Pro Subscriptions</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== APPS SHOWCASE ==================== -->
+  <section id="apps" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Development Pipeline</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">10 APPS IN CLOSED BETA</span>
+        </div>
+        <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mt-1">Our Apps in Build & Testing</h2>
+      </div>
+      <p class="text-sm text-zinc-500 dark:text-zinc-400 max-w-md">
+        Balanced portfolio: tap <span class="font-semibold text-zinc-800 dark:text-zinc-200">"Quick Specs"</span> on any card to view beta roadmap without losing your scroll position.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar text-xs font-semibold">
+      <button onclick="filterApps('all', this)" class="tab-btn active px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        All Apps (10)
+      </button>
+      <button onclick="filterApps('mindfulness', this)" class="tab-btn px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        Screentime & Mindfulness (5)
+      </button>
+      <button onclick="filterApps('productivity', this)" class="tab-btn px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        Focus & Productivity (3)
+      </button>
+      <button onclick="filterApps('sports-utilities', this)" class="tab-btn px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        Sports & Social Utilities (2)
+      </button>
+    </div>
+
+    <!-- APPS GRID: 1 Wide Spotlight + 9 Symmetrical Cards = Symmetrical Harmony -->
+    <div id="apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- ==================== FLAGSHIP SPOTLIGHT: SwimPulse Pro (Wide 2-Column Card) ==================== -->
+      <div class="app-card md:col-span-2 rounded-3xl border-2 border-cyan-500/30 bg-gradient-to-br from-white via-white to-cyan-50/40 dark:from-zinc-900 dark:via-zinc-900 dark:to-cyan-950/20 p-6 sm:p-8 flex flex-col justify-between hover:border-cyan-500 transition-all hover:shadow-xl group" data-category="sports-utilities">
+        <div>
+          <!-- Top Row -->
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+            <div class="flex items-center gap-4">
+              <!-- Custom App Icon -->
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                <i data-lucide="waves" class="w-8 h-8"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-2xl font-extrabold text-zinc-900 dark:text-zinc-50">SwimPulse Pro</h3>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300">STUDIO SPOTLIGHT</span>
+                </div>
+                <p class="text-xs font-semibold text-cyan-600 dark:text-cyan-400 mt-0.5">The Swimming App for Coaches and Parents</p>
+              </div>
+            </div>
+
+            <!-- Status Pills -->
+            <div class="flex flex-col items-end gap-1.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                Closed Beta Testing
+              </span>
+              <span class="text-[11px] font-mono font-semibold text-cyan-600 dark:text-cyan-400">Free / Pro Subscription &bull; Cloud Sync</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-zinc-600 dark:text-zinc-300 text-sm sm:text-base leading-relaxed max-w-3xl">
+            Precision stopwatch splits, meet heat-sheet management, athlete development curves, and instantaneous coach-to-parent sync. Solves the chaos of swim meets by streaming race results directly to parents' phones in real time.
+          </p>
+
+          <!-- Feature Pills -->
+          <div class="flex flex-wrap gap-2 mt-5">
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-cyan-100/70 dark:bg-cyan-950/50 text-cyan-800 dark:text-cyan-300">Multi-Swimmer Stopwatch</span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-cyan-100/70 dark:bg-cyan-950/50 text-cyan-800 dark:text-cyan-300">Parent Live Race Sync</span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Phone & Email Login</span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">Cloud Sync (Firebase/Supabase)</span>
+          </div>
+
+          <!-- Inline Expandable Specs Drawer -->
+          <div id="drawer-swimpulse" class="spec-drawer mt-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+              <div class="p-3 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/60">
+                <span class="font-bold text-zinc-900 dark:text-zinc-100 block mb-1">Architecture & Data</span>
+                <p>Phone/Email passwordless authentication with end-to-end encrypted roster synchronization. Local caching ensures full functionality even at poolside without cellular service.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/60">
+                <span class="font-bold text-zinc-900 dark:text-zinc-100 block mb-1">Testing & Subscription Model</span>
+                <p>Currently in closed test flights with select swim academies. Pro tier features team roster exports and multi-assistant coach synchronization.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Footer Actions -->
+        <div class="mt-6 pt-5 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-3">
+          <button onclick="toggleDrawer('drawer-swimpulse', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-cyan-600 dark:hover:text-cyan-400 inline-flex items-center gap-1.5 transition-colors">
+            <span>Quick Specs & Details</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <div class="flex items-center gap-2">
+            <a href="#beta-signup" class="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white transition-colors flex items-center gap-1.5 shadow-sm">
+              <span>Join SwimPulse Beta</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== APP 2: Do Nothing ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-amber-400 transition-all hover:shadow-lg group" data-category="mindfulness">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-zinc-950 flex items-center justify-center shadow-md shadow-amber-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="circle-dot" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">100% Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Do Nothing</h3>
+          <p class="text-xs font-semibold text-amber-600 dark:text-amber-400 mt-0.5">Reduce Screentime Naturally</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            A tiny dot gently moves across a tranquil screen, then remains completely still. If you touch or tilt the phone, the pause resets. Breaks reflexive doomscrolling.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">No Account</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Dopamine Reset</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Zero Ads</span>
+          </div>
+
+          <!-- Drawer -->
+          <div id="drawer-donothing" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>How it works:</strong> Choose 2, 5, or 10 mindful minutes. Designed with zero telemetry, zero accounts, and 100% local operation on Android and iOS.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-donothing', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 3: Breathing ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-teal-400 transition-all hover:shadow-lg group" data-category="mindfulness">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-400 to-emerald-600 text-white flex items-center justify-center shadow-md shadow-teal-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="wind" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Breathing</h3>
+          <p class="text-xs font-semibold text-teal-600 dark:text-teal-400 mt-0.5">Guided Rhythm & Calm Patterns</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            Scientifically backed breathwork rhythms (Box breathing, 4-7-8, and physiological sighs) guided with soothing visual pulses and eyes-closed haptic cues.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Box Breathing</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Eyes-Closed Haptics</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">No Account</span>
+          </div>
+
+          <div id="drawer-breathing" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Subtle motor vibrations signal inhalation, hold, and exhalation without requiring you to look at the screen. Completely free with zero accounts.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-breathing', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 4: Stare ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-violet-400 transition-all hover:shadow-lg group" data-category="mindfulness">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-violet-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="eye" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Stare</h3>
+          <p class="text-xs font-semibold text-violet-600 dark:text-violet-400 mt-0.5">Visual Mindfulness & Eye Relaxation</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            Relieve digital eye fatigue. Calibrated harmonic focal patterns and the 20-20-20 rule to gently rest ciliary eye muscles after prolonged monitor work.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">20-20-20 Rule</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Eye Muscle Rest</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Offline</span>
+          </div>
+
+          <div id="drawer-stare" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Minimalist focal depth geometric patterns that shift smoothly across screen planes, training eyes to relax focal contraction.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-stare', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 5: Pop ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-rose-400 transition-all hover:shadow-lg group" data-category="mindfulness">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white flex items-center justify-center shadow-md shadow-rose-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="sparkle" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Pop</h3>
+          <p class="text-xs font-semibold text-rose-600 dark:text-rose-400 mt-0.5">Tactile Stress Relief & Haptic Fidget</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            The digital equivalent of bubble wrap. Hyper-realistic tactile vibration feedback, crisp acoustic clicks, and endless satisfying pops whenever anxiety or boredom strikes.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Linear Haptics</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">4 Bubble Textures</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Offline</span>
+          </div>
+
+          <div id="drawer-pop" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Native haptic engine integration (CoreHaptics on iOS, VibrationEffect on Android) tuned to replicate tactile resistance.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-pop', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 6: One Thing ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-amber-400 transition-all hover:shadow-lg group" data-category="productivity">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 text-zinc-950 flex items-center justify-center shadow-md shadow-amber-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="target" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">100% Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">One Thing</h3>
+          <p class="text-xs font-semibold text-amber-600 dark:text-amber-400 mt-0.5">Single-Task Deep Focus Sprint</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            Stop multitasking. Type exactly one task, pick 5, 10, or 15 minutes, and put everything else away until the timer finishes. Your task stays pinned full-screen.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">5 / 10 / 15 Mins</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Anti-Multitask</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Local Only</span>
+          </div>
+
+          <div id="drawer-onething" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Clean full-screen presentation mode that prevents notification peeking. Stored locally without cloud dependency.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-onething', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 7: Wait ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-indigo-400 transition-all hover:shadow-lg group" data-category="mindfulness">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="hourglass" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Wait</h3>
+          <p class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">Intentional Micro-Pauses</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            Turn waiting in line, elevator rides, or commute pauses into small, intentional moments rather than instinctively unlocking your device for social media.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Micro-Moments</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">No Account</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Zero Ads</span>
+          </div>
+
+          <div id="drawer-wait" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Curated 30-second to 2-minute philosophical reflections and ambient sound micro-sessions.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-wait', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 8: One Question ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-amber-400 transition-all hover:shadow-lg group" data-category="productivity">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-zinc-950 flex items-center justify-center shadow-md shadow-amber-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="help-circle" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">100% Free &bull; Local Only</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">One Question</h3>
+          <p class="text-xs font-semibold text-amber-600 dark:text-amber-400 mt-0.5">One Thoughtful Daily Journal Prompt</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            One profound, non-cliché question delivered every morning. Write two sentences or a page. Builds an intimate multi-year time capsule of your thoughts.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Daily Archive</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Encrypted Notes</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Offline-First</span>
+          </div>
+
+          <div id="drawer-onequestion" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Zero blank-page intimidation. Stored encrypted on-device with zero accounts or cloud tracking.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-onequestion', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 9: PhoneDown ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-orange-400 transition-all hover:shadow-lg group" data-category="productivity">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 text-white flex items-center justify-center shadow-md shadow-orange-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="smartphone-charging" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">100% Free &bull; Offline</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">PhoneDown</h3>
+          <p class="text-xs font-semibold text-orange-600 dark:text-orange-400 mt-0.5">Physical Face-Down Detox Challenge</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            Flip your phone face down on your desk. Using the proximity sensor and gyroscope, PhoneDown builds screen-free streaks only while you keep your hands off the device.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Proximity Sensor</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Desk Focus</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Offline-First</span>
+          </div>
+
+          <div id="drawer-phonedown" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Hardware sensors detect surface contact without consuming excess battery. If you pick up the phone, your session logs cleanly.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-phonedown', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== APP 10: SplitPlain (SplitWise-style) ==================== -->
+      <div class="app-card rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 flex flex-col justify-between hover:border-emerald-400 transition-all hover:shadow-lg group" data-category="sports-utilities">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/10 group-hover:scale-105 transition-transform">
+              <i data-lucide="split" class="w-7 h-7"></i>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Beta Testing
+              </span>
+              <span class="text-[10px] font-mono font-semibold text-emerald-600 dark:text-emerald-400">Free / Pro Subscription &bull; Cloud</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">SplitPlain</h3>
+          <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">Frictionless Shared Expense Splitting</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed">
+            Split rent, groceries, trips, and dinners with roommates and friends without complex menus or aggressive paywalls. Phone/Email sign-in with instant debt simplification.
+          </p>
+
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Debt Simplification</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Multi-Currency</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300">Offline & Sync</span>
+          </div>
+
+          <div id="drawer-splitplain" class="spec-drawer mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2"><strong>Highlights:</strong> Respectful, ad-free alternative. Add expenses offline on trips; balances calculate automatically once internet is restored.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <button onclick="toggleDrawer('drawer-splitplain', this)" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1">
+            <span>Quick Specs</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 drawer-icon transition-transform"></i>
+          </button>
+          <a href="#beta-signup" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-amber-500 hover:text-zinc-950 transition-colors">
+            <span>Join Beta</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Beta Callout Banner -->
+    <div class="mt-12 p-6 sm:p-8 rounded-3xl border border-amber-500/30 bg-amber-500/5 dark:bg-amber-950/20 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500 text-zinc-950 flex items-center justify-center flex-shrink-0 font-bold">
+          <i data-lucide="flask-conical" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-base text-zinc-900 dark:text-zinc-100">Closed Beta Invitation Process</h4>
+          <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+            Google Play requires 20 verified testers for closed testing, and Apple TestFlight supports private invite links. Submit your email below to receive direct opt-in links as builds roll out.
+          </p>
+        </div>
+      </div>
+      <a href="#beta-signup" class="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-zinc-950 whitespace-nowrap transition-colors shadow-sm">
+        Join Closed Testing Track &rarr;
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ==================== PHILOSOPHY & ARCHITECTURE ==================== -->
+  <section id="philosophy" class="py-20 bg-zinc-100/60 dark:bg-zinc-900/30 border-y border-zinc-200/80 dark:border-zinc-800/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Studio Principles</span>
+        <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mt-1">Built Right, Priced Fairly</h2>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2">
+          How Plain Day Studio approaches software craftsmanship, user attention, and privacy.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+          <div class="w-11 h-11 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+            <i data-lucide="smartphone" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-zinc-900 dark:text-zinc-100">Native Android & iOS Flow</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+            Built for high frame rates, responsive gesture systems, and native system haptics across both Google Android and Apple iOS platforms.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+          <div class="w-11 h-11 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-zinc-900 dark:text-zinc-100">Hybrid Privacy Model</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+            Mindfulness apps run completely offline with zero accounts. Collaborative apps (SwimPulse Pro & SplitPlain) use phone/email authentication with encrypted sync.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+            <i data-lucide="heart" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-zinc-900 dark:text-zinc-100">No Predatory Traps</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+            Zero forced 30-second full-screen video ads. Core utilities are free forever. Pro subscriptions process transparently through official Google & Apple billing.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== BETA SIGNUP ==================== -->
+  <section id="beta-signup" class="py-20 bg-zinc-900 text-white dark:bg-black border-t border-zinc-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <div class="w-12 h-12 rounded-2xl bg-amber-500 text-zinc-950 flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="beaker" class="w-6 h-6"></i>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Join Our Closed Beta Testing</h2>
+      <p class="mt-4 text-zinc-400 max-w-xl mx-auto text-sm sm:text-base">
+        Help us test our apps before public release. Select your platform and apps of interest. We'll send your Google Play Closed Test track or Apple TestFlight invitation.
+      </p>
+
+      <form id="beta-form" onsubmit="handleBetaSubmit(event)" class="mt-8 max-w-lg mx-auto space-y-3 text-left">
+        <div>
+          <input 
+            type="email" 
+            id="beta-email"
+            required 
+            placeholder="Your Email (Google Play or Apple ID)" 
+            class="w-full px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <select id="beta-platform" class="px-3 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <option value="Android (Google Play)">Android (Google Play)</option>
+            <option value="iOS (Apple TestFlight)">iOS (Apple TestFlight)</option>
+            <option value="Both Platforms">Both Android & iOS</option>
+          </select>
+
+          <select id="beta-target-app" class="px-3 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <option value="All Apps">Interested in All Apps</option>
+            <option value="SwimPulse Pro">SwimPulse Pro</option>
+            <option value="Do Nothing">Do Nothing</option>
+            <option value="Breathing">Breathing</option>
+            <option value="Stare">Stare</option>
+            <option value="Pop">Pop</option>
+            <option value="One Thing">One Thing</option>
+            <option value="Wait">Wait</option>
+            <option value="One Question">One Question</option>
+            <option value="PhoneDown">PhoneDown</option>
+            <option value="SplitPlain">SplitPlain</option>
+          </select>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-3.5 px-6 rounded-xl font-bold bg-amber-500 hover:bg-amber-400 text-zinc-950 text-sm transition-colors flex items-center justify-center gap-2 shadow-sm"
+        >
+          <span>Submit Beta Application</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </form>
+
+      <div id="beta-feedback" class="mt-4 p-3 rounded-xl bg-emerald-950/80 border border-emerald-700 text-emerald-300 text-xs max-w-md mx-auto hidden">
+        🎉 Thank you! Your tester request has been recorded. We will email your closed test invite link.
+      </div>
+
+      <p class="mt-4 text-xs text-zinc-500">
+        Review our <a href="privacy.html" class="underline hover:text-zinc-400">Privacy Policy</a> & <a href="terms.html" class="underline hover:text-zinc-400">Terms of Service</a>.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ==================== REDESIGNED FOOTER (Senior UX Polish) ==================== -->
+  <footer class="mt-auto border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-16 text-sm text-zinc-500 dark:text-zinc-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
+        
+        <!-- Col 1: Brand Info (4 cols) -->
+        <div class="md:col-span-4">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div id="footer-brand-icon" class="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-center p-1.5 shadow-sm">
+              <svg class="w-full h-full" viewBox="0 0 54 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 11 36 V 11" stroke="#FBBF24" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="21" cy="21" r="10" stroke="#FBBF24" stroke-width="3.5"/>
+                <path d="M 43 6 V 31" stroke="#00E5FF" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="33" cy="21" r="10" stroke="#00E5FF" stroke-width="3.5"/>
+                <path d="M 27 13 A 10 10 0 0 1 27 29 A 10 10 0 0 1 27 13" fill="#F97316" fill-opacity="0.3"/>
+                <path d="M 27 13 A 10 10 0 0 1 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M 27 13 A 10 10 0 0 0 27 29" stroke="#F97316" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="font-extrabold text-zinc-900 dark:text-zinc-100">Plain Day Studio</span>
+          </div>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 max-w-sm leading-relaxed mb-4">
+            Independent mobile application lab crafting focused, distraction-free experiences for Android and iOS. Built with care, craft, and respect for user attention.
+          </p>
+          <div class="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+            Support: <a href="mailto:contact.plaindaystudio@gmail.com" class="text-amber-600 dark:text-amber-400 hover:underline">contact.plaindaystudio@gmail.com</a>
+          </div>
+        </div>
+
+        <!-- Col 2: App Pipeline Column 1 (Screentime & Focus - 3 cols) -->
+        <div class="md:col-span-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 mb-3 flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+            <span>Screentime & Focus</span>
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>Do Nothing</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>Breathing</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>Stare</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>Pop</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>Wait</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: App Pipeline Column 2 (Productivity & Sports - 3 cols) -->
+        <div class="md:col-span-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 mb-3 flex items-center gap-1.5">
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-500"></i>
+            <span>Productivity & Sports</span>
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>SwimPulse Pro</span><span class="font-mono text-[10px] text-cyan-600 dark:text-cyan-400 font-semibold">Free / Pro Sub</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>One Thing</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>PhoneDown</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>One Question</span><span class="font-mono text-[10px] text-zinc-400">Free</span></a></li>
+            <li><a href="#apps" class="hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center justify-between"><span>SplitPlain</span><span class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">Free / Pro Sub</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Legal & Stores (2 cols) -->
+        <div class="md:col-span-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 mb-3">Store Compliance</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="privacy.html" class="hover:text-zinc-900 dark:hover:text-zinc-200 font-semibold text-amber-600 dark:text-amber-400">Privacy Policy</a></li>
+            <li><a href="terms.html" class="hover:text-zinc-900 dark:hover:text-zinc-200">Terms of Service</a></li>
+            <li><a href="contact.html" class="hover:text-zinc-900 dark:hover:text-zinc-200">Developer Support</a></li>
+            <li><a href="#beta-signup" class="hover:text-zinc-900 dark:hover:text-zinc-200">Join TestFlight</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <div>
+          &copy; <span id="year">2026</span> Plain Day Studio. All applications in active closed beta testing.
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="inline-flex items-center gap-1.5 text-zinc-400">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span>Closed Beta Track Active</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dark/Light Theme
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = localStorage.getItem('plainday_theme') || (userPrefersDark ? 'dark' : 'light');
+
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('plainday_theme', isDark ? 'dark' : 'light');
+    });
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Category Filter
+    function filterApps(category, btnElement) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) {
+        btnElement.classList.add('active');
+      }
+
+      const cards = document.querySelectorAll('.app-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Inline Spec Drawer Toggle
+    function toggleDrawer(drawerId, btn) {
+      const drawer = document.getElementById(drawerId);
+      const isOpen = drawer.classList.contains('open');
+      const icon = btn.querySelector('.drawer-icon');
+
+      if (isOpen) {
+        drawer.classList.remove('open');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      } else {
+        drawer.classList.add('open');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // Beta Form
+    function handleBetaSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('beta-email').value.trim();
+      const platform = document.getElementById('beta-platform').value;
+      const app = document.getElementById('beta-target-app').value;
+      if (!email) return;
+
+      const waitlist = JSON.parse(localStorage.getItem('plainday_waitlist') || '[]');
+      waitlist.push({ email, platform, app, date: new Date().toISOString() });
+      localStorage.setItem('plainday_waitlist', JSON.stringify(waitlist));
+
+      document.getElementById('beta-email').value = '';
+      const feedback = document.getElementById('beta-feedback');
+      feedback.classList.remove('hidden');
+      setTimeout(() => {
+        feedback.classList.add('hidden');
+      }, 6000);
+    }
+  </script>
+</body>
+</html>
