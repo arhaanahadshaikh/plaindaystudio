@@ -189,8 +189,8 @@
             <span>Send Message</span>
           </button>
 
-          <div id="contact-status" class="hidden p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs text-center font-medium">
-            ✅ Feedback recorded! Launching email client draft...
+          <div id="contact-status" class="hidden p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs text-center font-medium">
+            ✅ Thank you! Your message has been sent directly to the Plain Day Studio team. We will reply to your email shortly.
           </div>
         </form>
 
@@ -264,23 +264,58 @@
       localStorage.setItem('plainday_theme', isDark ? 'dark' : 'light');
     });
 
-    function handleContactSubmit(e) {
+    // Google Apps Script WebApp Endpoint
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby99bekA2evX4D0le4am2aAE7RLIPtaxMVERh0NSOS6rQ_SxFRSqdHsjfbguexsnOCVqw/exec';
+
+    async function handleContactSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('c-name').value;
-      const email = document.getElementById('c-email').value;
+      const name = document.getElementById('c-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
       const app = document.getElementById('c-app').value;
       const platform = document.getElementById('c-platform').value;
-      const msg = document.getElementById('c-msg').value;
+      const msg = document.getElementById('c-msg').value.trim();
 
-      const subject = encodeURIComponent(`[${app}] [${platform}] Feedback from ${name}`);
-      const body = encodeURIComponent(`Sender: ${name} (${email})\nApp: ${app}\nPlatform: ${platform}\n\nMessage:\n${msg}`);
-      
-      const status = document.getElementById('contact-status');
-      status.classList.remove('hidden');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalBtnHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Sending...</span>`;
 
-      setTimeout(() => {
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            type: 'contact',
+            name: name,
+            email: email,
+            app: app,
+            platform: platform,
+            message: msg
+          })
+        });
+
+        document.getElementById('c-name').value = '';
+        document.getElementById('c-email').value = '';
+        document.getElementById('c-msg').value = '';
+
+        const status = document.getElementById('contact-status');
+        status.classList.remove('hidden');
+        setTimeout(() => {
+          status.classList.add('hidden');
+        }, 8000);
+      } catch (err) {
+        console.error('Contact submit error:', err);
+        // Fallback to mailto if network fails
+        const subject = encodeURIComponent(`[${app}] [${platform}] Message from ${name}`);
+        const body = encodeURIComponent(`Sender: ${name} (${email})\nApp: ${app}\nPlatform: ${platform}\n\nMessage:\n${msg}`);
         window.location.href = `mailto:plaindaystudio@gmail.com?subject=${subject}&body=${body}`;
-      }, 600);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+      }
     }
   </script>
 </body>

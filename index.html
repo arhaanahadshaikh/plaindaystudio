@@ -978,6 +978,9 @@
       });
     }
 
+    // Google Apps Script WebApp Endpoint
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby99bekA2evX4D0le4am2aAE7RLIPtaxMVERh0NSOS6rQ_SxFRSqdHsjfbguexsnOCVqw/exec';
+
     // Inline Spec Drawer Toggle
     function toggleDrawer(drawerId, btn) {
       const drawer = document.getElementById(drawerId);
@@ -994,23 +997,56 @@
     }
 
     // Beta Form
-    function handleBetaSubmit(e) {
+    async function handleBetaSubmit(e) {
       e.preventDefault();
-      const email = document.getElementById('beta-email').value.trim();
+      const emailInput = document.getElementById('beta-email');
+      const email = emailInput.value.trim();
       const platform = document.getElementById('beta-platform').value;
       const app = document.getElementById('beta-target-app').value;
       if (!email) return;
 
-      const waitlist = JSON.parse(localStorage.getItem('plainday_waitlist') || '[]');
-      waitlist.push({ email, platform, app, date: new Date().toISOString() });
-      localStorage.setItem('plainday_waitlist', JSON.stringify(waitlist));
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalBtnHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Submitting...</span>`;
 
-      document.getElementById('beta-email').value = '';
-      const feedback = document.getElementById('beta-feedback');
-      feedback.classList.remove('hidden');
-      setTimeout(() => {
-        feedback.classList.add('hidden');
-      }, 6000);
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            type: 'beta',
+            email: email,
+            platform: platform,
+            app: app
+          })
+        });
+
+        // Backup locally as well
+        const waitlist = JSON.parse(localStorage.getItem('plainday_waitlist') || '[]');
+        waitlist.push({ email, platform, app, date: new Date().toISOString() });
+        localStorage.setItem('plainday_waitlist', JSON.stringify(waitlist));
+
+        emailInput.value = '';
+        const feedback = document.getElementById('beta-feedback');
+        feedback.classList.remove('hidden');
+        feedback.innerHTML = `🎉 Thank you! Your tester request for <strong>${app}</strong> (${platform}) has been recorded. We will email your invite link to <strong>${email}</strong>.`;
+        setTimeout(() => {
+          feedback.classList.add('hidden');
+        }, 8000);
+      } catch (err) {
+        console.error('Submission error:', err);
+        const feedback = document.getElementById('beta-feedback');
+        feedback.classList.remove('hidden');
+        feedback.className = "mt-4 p-3 rounded-xl bg-red-950/80 border border-red-700 text-red-300 text-xs max-w-md mx-auto";
+        feedback.innerHTML = `⚠️ Submission temporarily unavailable. Please email us directly at <a href="mailto:plaindaystudio@gmail.com" class="underline">plaindaystudio@gmail.com</a>.`;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+      }
     }
   </script>
 </body>
