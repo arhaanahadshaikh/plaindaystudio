@@ -53,7 +53,7 @@ Then visit **`http://localhost:3000`** in your browser.
 
 ### Google Play Console
 1. **Privacy Policy Link**: `https://yourdomain.com/privacy.html`
-2. **Developer Contact**: `contact.plaindaystudio@gmail.com`
+2. **Developer Contact**: `plaindaystudio@gmail.com`
 3. **Closed Testing Track (20 Testers)**: Collect tester emails via the beta form on `index.html`.
 
 ### Apple App Store & App Store Connect
